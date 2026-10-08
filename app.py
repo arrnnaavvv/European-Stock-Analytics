@@ -1,7 +1,7 @@
-
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # -----------------------------
 # PAGE CONFIG
@@ -15,26 +15,27 @@ st.set_page_config(
 # -----------------------------
 # LOAD DATA
 # -----------------------------
-base_path = "/content/drive/MyDrive/European_Stock_Analytics/data"
+# Finds the data folder relative to app.py
+base_path = Path(__file__).resolve().parent / "data"
 
 final_score = pd.read_csv(
-    f"{base_path}/final_investment_ranking.csv"
+    base_path / "final_investment_ranking.csv"
 )
 
 financial_summary = pd.read_csv(
-    f"{base_path}/financial_summary.csv"
+    base_path / "financial_summary.csv"
 )
 
 risk_summary = pd.read_csv(
-    f"{base_path}/risk_summary.csv"
+    base_path / "risk_summary.csv"
 )
 
 valuation_table = pd.read_csv(
-    f"{base_path}/valuation_table.csv"
+    base_path / "valuation_table.csv"
 )
 
 stock_returns = pd.read_csv(
-    f"{base_path}/stock_returns.csv"
+    base_path / "stock_returns.csv"
 )
 
 # Convert stock return columns to numbers
@@ -47,7 +48,7 @@ for column in ["1Y Return", "3Y Return", "5Y Return"]:
 # -----------------------------
 # CALCULATE REVENUE CAGR
 # -----------------------------
-financial_file = f"{base_path}/financial_data.xlsx"
+financial_file = base_path / "financial_data.xlsx"
 
 company_sheets = [
     "ASML",
